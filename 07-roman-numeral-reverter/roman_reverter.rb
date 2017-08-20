@@ -11,11 +11,24 @@ class Roman
 
   }
 
+  @translate.default = 0
+
   def self.reverter(roman)
     letters = roman.split("")
     value = 0
-    letters.length.times do |i|
-      value += @translate[letters[i]]
+    if letters.length == 1
+      value = @translate[letters[0]]
+    else
+      letters.length.times do |i|
+        if @translate[letters[i+1]] > @translate[letters[i]]
+        else
+          if @translate[letters[i-1]] < @translate[letters[i]] && i != 0
+            value += @translate[letters[i]] - @translate[letters[i-1]]
+          else
+            value += @translate[letters[i]]
+          end
+        end
+      end
     end
     return value
   end

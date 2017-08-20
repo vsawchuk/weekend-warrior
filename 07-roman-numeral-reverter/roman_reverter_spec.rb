@@ -53,27 +53,22 @@ describe "Roman Reverter" do
   end
 
   it "Check another subtracted value" do
-    skip
     expect(Roman.reverter("IX")).must_equal 9
   end
 
   it "Check 19" do
-    skip
     expect(Roman.reverter("XIX")).must_equal 19
   end
 
   it "Check forty" do
-    skip
     expect(Roman.reverter("XL")).must_equal 40
   end
 
   it "Check five hundred and seventy six" do
-    skip
     expect( Roman.reverter("DLXXVI") ).must_equal 576
   end
 
   it  "Check four thousand nine hundred and ninety nine" do
-    skip
     expect( Roman.reverter("MMMMCMXCIX") ).must_equal 4999
   end
 end
