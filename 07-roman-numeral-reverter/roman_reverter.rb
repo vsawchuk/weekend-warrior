@@ -13,22 +13,28 @@ class Roman
 
   @translate.default = 0
 
+  def self.current_lower_than_next?(arr, index)
+    return @translate[arr[index+1]] > @translate[arr[index]]
+  end
+
+  def self.current_higher_than_previous?(arr, index)
+    return @translate[arr[index-1]] < @translate[arr[index]] && index != 0
+  end
+
+  def self.calculate_value(arr, index)
+    if self.current_higher_than_previous?(arr, index)
+      return @translate[arr[index]] - @translate[arr[index-1]]
+    end
+    return @translate[arr[index]]
+  end
+
   def self.reverter(roman)
     letters = roman.split("")
     value = 0
-    if letters.length == 1
-      value = @translate[letters[0]]
-    else
-      letters.length.times do |i|
-        if @translate[letters[i+1]] > @translate[letters[i]]
-        else
-          if @translate[letters[i-1]] < @translate[letters[i]] && i != 0
-            value += @translate[letters[i]] - @translate[letters[i-1]]
-          else
-            value += @translate[letters[i]]
-          end
-        end
-      end
+    return @translate[letters[0]] if letters.length == 1
+    letters.length.times do |i|
+      next if self.current_lower_than_next?(letters, i)
+      value += self.calculate_value(letters, i)
     end
     return value
   end
