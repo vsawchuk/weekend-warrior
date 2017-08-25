@@ -1,3 +1,5 @@
+require 'faker'
+
 class Robot
 
   attr_reader :name
@@ -14,8 +16,7 @@ class Robot
   end
 
   def give_name
-    letters = ("A".."Z").to_a
-    @name = letters.sample + letters.sample + rand(0..9).to_s + rand(0..9).to_s + rand(0..9).to_s
+    @name = Faker::Base.regexify(/^[A-Z]{2}\d{3}$/)
   end
 
 end # end robot class
