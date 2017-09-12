@@ -1,9 +1,5 @@
-def words(word)
-  keys = word.split(" ")
-  final_hash = Hash.new(0)
-  keys.each do |aword|
-    final_hash[aword] +=1
-  end
-
-  return final_hash
+def words(string)
+  keys = string.split(" ")
+  arr = keys.uniq.map { |word| [word, keys.count(word)]}
+  return arr.to_h
 end
